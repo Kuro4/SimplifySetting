@@ -127,7 +127,7 @@ namespace SimplifySettings
         /// </summary>
         /// <typeparam name="T">ApplicationSettingsBaseを継承したSettingsクラス</typeparam>
         /// <returns>Settings</returns>
-        private static T GetDefailt<T>() where T : ApplicationSettingsBase
+        private static T GetDefault<T>() where T : ApplicationSettingsBase
         {
             return (T)typeof(T).GetProperty("Default").GetMethod.Invoke(null, null);
         }
@@ -137,7 +137,7 @@ namespace SimplifySettings
         /// <typeparam name="T">ApplicationSettingsBaseを継承したSettingsクラス</typeparam>
         public static void ReloadSettings<T>() where T : ApplicationSettingsBase
         {
-            ReloadSettings(GetDefailt<T>());
+            ReloadSettings(GetDefault<T>());
         }
         /// <summary>
         /// 設定を規定値にリセットする
@@ -145,7 +145,7 @@ namespace SimplifySettings
         /// <typeparam name="T">ApplicationSettingsBaseを継承したSettingsクラス</typeparam>
         public static void ResetSettings<T>() where T : ApplicationSettingsBase
         {
-            ResetSettings(GetDefailt<T>());
+            ResetSettings(GetDefault<T>());
         }
         /// <summary>
         /// 現在の設定値を保存する
@@ -153,7 +153,7 @@ namespace SimplifySettings
         /// <typeparam name="T">ApplicationSettingsBaseを継承したSettingsクラス</typeparam>
         public static void SaveSettings<T>() where T : ApplicationSettingsBase
         {
-            SaveSettings(GetDefailt<T>());
+            SaveSettings(GetDefault<T>());
         }
         /// <summary>
         /// 指定したプロパティ名に指定値をセットして保存する
@@ -163,7 +163,7 @@ namespace SimplifySettings
         /// <param name="value">設定値</param>
         public static void SaveSettings<T>(string key, object value) where T : ApplicationSettingsBase
         {
-            SaveSettings(GetDefailt<T>(), key, value);
+            SaveSettings(GetDefault<T>(), key, value);
         }
         /// <summary>
         /// KeyValuePairで指定したプロパティ名へ値をセットして保存する
@@ -181,7 +181,7 @@ namespace SimplifySettings
         /// <param name="keyValues">IEnumerableなプロパティ名と値のペア</param>
         public static void SaveSettings<T>(IEnumerable<KeyValuePair<string, object>> keyValues) where T : ApplicationSettingsBase
         {
-            SaveSettings(GetDefailt<T>(), keyValues);
+            SaveSettings(GetDefault<T>(), keyValues);
         }
         /// <summary>
         /// 指定アクションを実行してからSettingsを保存する
@@ -190,7 +190,7 @@ namespace SimplifySettings
         /// <param name="action"></param>
         public static void SaveSettings<T>(Action<T> action) where T : ApplicationSettingsBase
         {
-            var settings = GetDefailt<T>();
+            var settings = GetDefault<T>();
             action.Invoke(settings);
             settings.Save();
         }
@@ -200,7 +200,7 @@ namespace SimplifySettings
         /// <typeparam name="T">ApplicationSettingsBaseを継承したSettingsクラス</typeparam>
         public static void UpgradeSettings<T>() where T : ApplicationSettingsBase
         {
-            UpgradeSettings(GetDefailt<T>());
+            UpgradeSettings(GetDefault<T>());
         }
         /// <summary>
         /// 指定したプロパティ名の値がfalseならSettingsをアップグレードして指定プロパティの値をtrueにして保存する
@@ -209,7 +209,7 @@ namespace SimplifySettings
         /// <param name="isUpgratedPropertyName">アップグレードするかのフラグを持ったプロパティ名</param>
         public static void UpgradeSettings<T>(string isUpgratedPropertyName) where T : ApplicationSettingsBase
         {
-            UpgradeSettings(GetDefailt<T>(), isUpgratedPropertyName);
+            UpgradeSettings(GetDefault<T>(), isUpgratedPropertyName);
         }
         /// <summary>
         /// 現在のアセンブリバージョンが指定バージョンより高ければSettingsをアップグレードして保存する
@@ -218,7 +218,7 @@ namespace SimplifySettings
         /// <param name="version">比較するアセンブリバージョン</param>
         public static void UpgradeSettings<T>(Version version) where T : ApplicationSettingsBase
         {
-            UpgradeSettings(GetDefailt<T>(), version);
+            UpgradeSettings(GetDefault<T>(), version);
         }
         #endregion
     }
